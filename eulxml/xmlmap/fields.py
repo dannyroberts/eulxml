@@ -817,7 +817,13 @@ class NodeListManager(object):
         # for each value in the new list, set the equivalent value
         # in the NodeList
         for i in range(len(value)):
-            current_list[i] = value[i]
+            try:
+                current_list[i] = value[i]
+            except IndexError:
+                # if the new list is longer than the old list
+                # keep adding
+                current_list.append(value[i])
+
 
         # remove any extra values from end of the current list
         while len(current_list) > len(value):
